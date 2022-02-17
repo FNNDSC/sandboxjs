@@ -1,0 +1,21 @@
+{
+  "name": "sanboxjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sandbox.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.7.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
