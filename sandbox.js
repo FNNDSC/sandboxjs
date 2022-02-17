@@ -1,8 +1,20 @@
-function sandbox(){
+export default class sandbox{
+  //
+  //
+  //\
+  //
+  //
+  
+  constructor(){
         this.fs = null;
   }
-    
-sandbox.prototype.onDeviceReady=function(callback){
+  
+  //
+  //
+  //
+  //
+  // 
+  onDeviceReady=function(callback){
       var self = this;
 
       // The file system has been prefixed as of Google Chrome 12:
@@ -15,19 +27,37 @@ sandbox.prototype.onDeviceReady=function(callback){
           if(callback){callback();}
         }, function(err) {throw new Error('Could not grant filesystem. Error code: ' + err.code);});
       } 
- }
- 
- sandbox.prototype.createPath=function(path, callback){
+   }
+   
+   //
+   //
+   //
+   //
+   
+   createPath=function(path, callback){
      var self=this;
      function createPath(){
-       console.log(self.fs)
-        // exclusive:false means if the folder already exists then don't throw an error
-        self.fs.root.getDirectory(path, {create: true, exclusive:false}, function(dirEntry) {
+     
+       function createFolder(rootDirEntry, folders){
+       
+
+         // exclusive:false means if the folder already exists then don't throw an error
+         rootDirEntry.getDirectory(folders[0], {create: true, exclusive:false}, function(dirEntry) {
             // Recursively add the new subfolder (if we still have another to create).
             
-            console.log("folder created")
-            if(callback){callback();}
-          }, self.onFail);
+            folders = folders.slice(1);
+            if(folders.length){
+              createFolder(dirEntry, folders);
+            }else if(callback){
+              callback(dirEntry);
+            }
+          }, self.onDirCreateFail);
+          
+        }
+          
+          // recusrsively create folder/sub-dirs
+          var folders = path.split("/");
+          createFolder(self.fs.root,folders);
      }
  
 
@@ -38,13 +68,32 @@ sandbox.prototype.onDeviceReady=function(callback){
        {
          this.onDeviceReady(createPath);
          }
- }
+   }
  
- sandbox.prototype.onFail = function(error){
+   onFail = function(error){
      console.log(error);
- }
- 
-sandbox.prototype.isFile = function(filePath, callback) {
+   }
+   onDirCreateFail = function(error){
+     console.log("Error while creating dir: "+error);
+   }
+   onFileCreateFail = function(error){
+     console.log("Error while creating file: "+error);
+   }
+   onFileGetFail = function(error){
+     console.log(error);
+   }
+   onBlobGetFail = function(error){
+     console.log(error);
+   }
+  
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  isFile = function(filePath, callback) {
       var self = this;
 
       function findFile() {
@@ -76,8 +125,14 @@ sandbox.prototype.isFile = function(filePath, callback) {
         this.onDeviceReady(findFile);
       }
     };
-
-sandbox.prototype.readFile = function(filePath, callback) {
+  
+  //
+  //
+  //
+  //\
+  //
+  //
+  readFile = function(filePath, callback) {
 
       this.getFileBlob(filePath, function(fileObj) {
         var reader = new FileReader();
@@ -95,8 +150,13 @@ sandbox.prototype.readFile = function(filePath, callback) {
         }
       });
     };
-    
-sandbox.prototype.getFileBlob = function(filePath, callback) {
+  
+  //
+  //
+  //
+  //\
+  //  
+  getFileBlob = function(filePath, callback) {
       var self = this;
 
       function getFile() {
@@ -124,8 +184,12 @@ sandbox.prototype.getFileBlob = function(filePath, callback) {
       }
     };
 
- 
-sandbox.prototype.writeFile = function(filePath, fileData, callback) {
+  //
+  //
+  //
+  //
+  //
+  writeFile = function(filePath, fileData, callback) {
       var self = this;
 
       function checkPathAndWriteFile() {
@@ -168,15 +232,15 @@ sandbox.prototype.writeFile = function(filePath, fileData, callback) {
               console.log(fileData + "pushed")
 
             }, self.onFail);
-          }, self.onFail);
+          }, self.onFileCreateFail);
         }
 
         var basedir = filePath.substring(0, filePath.lastIndexOf('/'));
-        console.log(filePath)
-        self.fs.root.getDirectory(basedir, {create: false}, function() {
-          console.log(basedir + "created")
-          writeFile();
-        }, self.onFail );
+        console.log(basedir)
+        self.createPath(basedir,writeFile);
+        
+        //writeFile();
+
       }
 
       if (this.fs) {
