@@ -6,7 +6,7 @@ To use as a npm package
 
 .. code-block:: bash
 
-$> npm install sanboxjs@1.0.0
+ $> npm install sanboxjs@1.0.0
 
 
 Import in your app.js
