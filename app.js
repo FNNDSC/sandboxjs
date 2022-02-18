@@ -17,8 +17,8 @@ submit.onclick=function(){
     var sbx = new sandbox();
     //sbx.onDeviceReady();
     //sbx.createPath("test");
-    var filePath = fileDir + upload.files[0].name
-    sbx.writeFile(filePath,upload.files[0]);
+    //var filePath = fileDir + upload.files[0].name
+    sbx.uploadFiles(upload.files,fileDir);
     
     
 

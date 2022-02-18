@@ -4773,6 +4773,13 @@ function sandbox() {
     }
   });
 
+  _defineProperty(this, "uploadFiles", function (files, uploadDir) {
+    for (var i = 0; i < files.length; i++) {
+      var filePath = uploadDir + files[i].name;
+      this.writeFile(filePath, files[i].name);
+    }
+  });
+
   _defineProperty(this, "createPath", function (path, callback) {
     var self = this;
 
@@ -4826,7 +4833,7 @@ function sandbox() {
     console.log(error);
   });
 
-  _defineProperty(this, "isFile", function (filePath, callback) {
+  _defineProperty(this, "downloadFile", function (filePath, callback) {
     var self = this;
 
     function findFile() {
@@ -5004,9 +5011,9 @@ var fileDir = "uploads/" + Date.now() + "/";
 submit.onclick = function () {
   var sbx = new _sandbox.default(); //sbx.onDeviceReady();
   //sbx.createPath("test");
+  //var filePath = fileDir + upload.files[0].name
 
-  var filePath = fileDir + upload.files[0].name;
-  sbx.writeFile(filePath, upload.files[0]);
+  sbx.uploadFiles(upload.files, fileDir);
 };
 
 var fileHandle;
@@ -5057,7 +5064,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45213" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37901" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -33,6 +33,19 @@ export default class sandbox{
    //
    //
    //
+   //
+   uploadFiles=function(files,uploadDir){
+     for(var i=0; i<files.length; i++){
+     
+       var filePath = uploadDir+files[i].name;
+       this.writeFile(filePath,files[i].name)
+     }
+   }
+   
+   //
+   //
+   //
+   //
    
    createPath=function(path, callback){
      var self=this;
@@ -93,7 +106,7 @@ export default class sandbox{
   //
   //
   //
-  isFile = function(filePath, callback) {
+  downloadFile = function(filePath, callback) {
       var self = this;
 
       function findFile() {

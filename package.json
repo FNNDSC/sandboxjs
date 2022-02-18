@@ -1,14 +1,14 @@
 {
   "name": "sanboxjs",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
+  "description": "JS library for file management in a browser (chrome &amp; edge) sandbox",
   "main": "sandbox.js",
   "scripts": {
     "dev": "parcel index.html",
     "build": "parcel build index.html"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sandip <sandipsamal117@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
@@ -17,5 +17,13 @@
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FNNDSC/sandboxjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FNNDSC/sandboxjs/issues"
+  },
+  "homepage": "https://github.com/FNNDSC/sandboxjs#readme"
 }
