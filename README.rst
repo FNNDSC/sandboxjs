@@ -6,7 +6,7 @@ To use as a npm package
 
 .. code-block:: bash
 
- $> npm install sanboxjs@1.0.0
+ $> npm install sanboxjs@1.1.0
 
 
 Import in your app.js
@@ -17,12 +17,21 @@ Import in your app.js
   import sandbox from 'sanboxjs'
 
 
-Push a file into browser sandbox
---------------------------------
+Push multiple files into browser sandbox
+---------------------------------------
 
 .. code-block:: bash
 
   var sbx = new sandbox();
-  sbx.writeFile(filePath,fileBlob)
+  var uploadDir = 'my/uploads/'
+  sbx.writeFile(files,uploadDir)
+  
+  
+Download a file from the sandbox
+---------------------------------
+
+.. code-block:: bash
+  
+  sbx.downloadFile('my/uploads/my-file.txt');
 
 
