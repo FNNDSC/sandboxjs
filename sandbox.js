@@ -11,6 +11,8 @@
  * TECHNOLOGY
  * - HTML5 filesystem API
  */
+import JsZip from 'jszip';
+import FileSaver from 'file-saver';
 export default class sandbox{
   
   /**
@@ -51,9 +53,8 @@ export default class sandbox{
     */
    uploadFiles=function(files,uploadDir){
      for(var i=0; i<files.length; i++){
-     
        var filePath = uploadDir+files[i].name;
-       this.writeFile(filePath,files[i].name)
+       this.writeFile(filePath,files[i])
      }
    };
    
@@ -121,12 +122,11 @@ export default class sandbox{
 
         self.fs.root.getFile(filePath, {create: false}, function(fileEntry) {
           // Get a File object representing the file,
-          fileEntry.file(function(fileObj) {
-            console.log(fileObj)
+          fileEntry.file(async function(fileObj) {
             const url = window.URL.createObjectURL(new Blob([fileObj]));
             const link = document.createElement("a");
             link.href = url;
-            link.setAttribute("download", filePath);
+            link.setAttribute("download", fileObj.name);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);

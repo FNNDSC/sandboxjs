@@ -1,6 +1,6 @@
 {
   "name": "sanboxjs",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "JS library for file management in a browser (chrome &amp; edge) sandbox",
   "main": "sandbox.js",
   "scripts": {
@@ -16,6 +16,8 @@
     "jszip": "^3.7.1"
   },
   "devDependencies": {
+    "install": "^0.13.0",
+    "npm": "^8.5.1",
     "parcel-bundler": "^1.12.5"
   },
   "repository": {
