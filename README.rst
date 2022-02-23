@@ -1,16 +1,16 @@
-# sandboxjs
-JS library for file management in a browser (chrome &amp; edge) sandbox
+sandboxjs
+---------
+Is a JS library for file management in a browser (chrome &amp; edge) sandbox
 
 To use as a npm package
 -----------------------
 
 .. code-block:: bash
 
- $> npm install sanboxjs@1.1.0
+ $> npm install sanboxjs
 
 
 Import in your app.js
------------------------
 
 .. code-block:: bash
 
@@ -18,7 +18,6 @@ Import in your app.js
 
 
 Push multiple files into browser sandbox
----------------------------------------
 
 .. code-block:: bash
 
@@ -28,7 +27,6 @@ Push multiple files into browser sandbox
   
   
 Download a file from the sandbox
----------------------------------
 
 .. code-block:: bash
   
